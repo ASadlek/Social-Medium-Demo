@@ -8,6 +8,7 @@ public class SocialMediumDemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SocialMediumDemoApplication.class, args);
+		System.out.println("Ready to go!");
 	}
 
 }
