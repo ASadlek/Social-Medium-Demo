@@ -28,6 +28,8 @@ public class User{
     @Column(nullable = false)
     private String email;
 
+    private String bio;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole userRole;
@@ -35,17 +37,18 @@ public class User{
     @OneToMany(mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
 
-
     private User(final User.Builder builder) {
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.password = builder.password;
         this.email = builder.email;
         this.userRole = builder.userRole;
+        this.bio = builder.bio;
         this.id = builder.id;
     }
 
     public static class Builder{
+        public String bio;
         private Long id;
         private String firstName;
         private String lastName;
@@ -74,6 +77,10 @@ public class User{
         }
         public Builder userRole(UserRole userRole) {
             this.userRole = userRole;
+            return this;
+        }
+        public Builder bio(String bio) {
+            this.bio = bio;
             return this;
         }
         public Builder id(Long id) {
@@ -111,5 +118,9 @@ public class User{
 
     public List<Post> getPosts() {
         return posts;
+    }
+
+    public String getBio() {
+        return bio;
     }
 }

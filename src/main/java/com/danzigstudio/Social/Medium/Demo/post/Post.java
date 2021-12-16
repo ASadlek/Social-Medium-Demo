@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
 
+    @Column
+    private LocalDateTime timeRecord;
+
 
     private Post(final Post.Builder builder) {
         this.id = builder.id;
@@ -41,6 +45,7 @@ public class Post {
         this.user = builder.user;
         this.likeReaction = builder.likeReaction;
         this.unlikeReaction = builder.unlikeReaction;
+        this.timeRecord = builder.timeRecord;
     }
 
     public static class Builder {
@@ -49,6 +54,7 @@ public class Post {
         private User user;
         private Integer likeReaction;
         private Integer unlikeReaction;
+        private LocalDateTime timeRecord;
 
         public Builder() {
         }
@@ -73,6 +79,12 @@ public class Post {
             this.unlikeReaction = unlikeReaction;
             return this;
         }
+
+        public Builder timeRecord(LocalDateTime timeRecord) {
+            this.timeRecord = timeRecord;
+            return this;
+        }
+
         public Post build(){
             return new Post(this);
         }
@@ -96,5 +108,21 @@ public class Post {
 
     public Integer getUnlikeReaction() {
         return unlikeReaction;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public LocalDateTime getTimeRecord() {
+        return timeRecord;
+    }
+
+    public void setLikeReaction(Integer likeReaction) {
+        this.likeReaction = likeReaction;
+    }
+
+    public void setUnlikeReaction(Integer unlikeReaction) {
+        this.unlikeReaction = unlikeReaction;
     }
 }

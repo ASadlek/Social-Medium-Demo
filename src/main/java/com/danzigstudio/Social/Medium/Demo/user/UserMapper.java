@@ -9,10 +9,11 @@ public class UserMapper {
                 .password(userDTO.getPassword())
                 .email(userDTO.getEmail())
                 .userRole(UserRole.valueOf(userDTO.getUserRole()))
+                .bio(userDTO.getBio())
                 .build();
     }
 
-    public static UserDTO userToUserDTO(User user){
+    /*public static UserDTO userToUserDTO(User user){
         return new UserDTO.Builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
@@ -21,7 +22,7 @@ public class UserMapper {
                 .userRole(user.getUserRole().toString())
                 .id(user.getId())
                 .build();
-    }
+    }*/
 
 }
 

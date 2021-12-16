@@ -1,0 +1,12 @@
+DROP TABLE t_reaction;
+CREATE TABLE t_reaction (
+   id serial NOT NULL PRIMARY KEY,
+	id_user integer NOT NULL,
+	reaction_type character varying NOT NULL,
+	reaction_object_type character varying NOT NULL,
+	id_post integer,
+	id_comment integer
+) ;
+
+SELECT * FROM t_reaction;
+

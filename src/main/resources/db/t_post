@@ -1,0 +1,13 @@
+DROP TABLE t_post;
+CREATE TABLE t_post (
+   id serial NOT NULL PRIMARY KEY,
+   description character varying NOT NULL,
+	id_user integer NOT NULL,
+	like_reaction integer NOT NULL,
+	unlike_reaction integer NOT NULL,
+	time_record timestamp NOT NULL
+) ;
+
+
+SELECT * FROM t_post;
+

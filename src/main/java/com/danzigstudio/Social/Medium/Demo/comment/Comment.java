@@ -5,6 +5,7 @@ import com.danzigstudio.Social.Medium.Demo.user.User;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "t_comment")
@@ -32,6 +33,9 @@ public class Comment {
     @Column
     private Integer unlikeReaction;
 
+    @Column
+    private LocalDateTime timeRecord;
+
 
     private Comment(final Builder builder) {
         this.id = builder.id;
@@ -40,6 +44,7 @@ public class Comment {
         this.post = builder.post;
         this.likeReaction = builder.likeReaction;
         this.unlikeReaction = builder.unlikeReaction;
+        this.timeRecord = builder.timeRecord;
     }
 
     public static class Builder {
@@ -49,6 +54,7 @@ public class Comment {
         private Post post;
         private Integer likeReaction;
         private Integer unlikeReaction;
+        private LocalDateTime timeRecord;
 
         public Builder() {
         }
@@ -75,6 +81,10 @@ public class Comment {
         }
         public Builder unlikeReaction(Integer unlikeReaction) {
             this.unlikeReaction = unlikeReaction;
+            return this;
+        }
+        public Builder timeRecord(LocalDateTime timeRecord) {
+            this.timeRecord = timeRecord;
             return this;
         }
         public Comment build(){
@@ -104,5 +114,17 @@ public class Comment {
 
     public Integer getUnlikeReaction() {
         return unlikeReaction;
+    }
+
+    public LocalDateTime getTimeRecord() {
+        return timeRecord;
+    }
+
+    public void setLikeReaction(Integer likeReaction) {
+        this.likeReaction = likeReaction;
+    }
+
+    public void setUnlikeReaction(Integer unlikeReaction) {
+        this.unlikeReaction = unlikeReaction;
     }
 }
