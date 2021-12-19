@@ -2,7 +2,7 @@ DROP TABLE t_comment;
 CREATE TABLE t_comment (
    id serial NOT NULL PRIMARY KEY,
    text_content character varying NOT NULL,
-	id_user integer NOT NULL,
+	id_profile integer NOT NULL,
 	id_post integer NOT NULL,
 	like_reaction integer NOT NULL,
 	unlike_reaction integer NOT NULL,

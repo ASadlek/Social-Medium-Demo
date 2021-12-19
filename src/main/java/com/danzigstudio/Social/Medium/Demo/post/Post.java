@@ -1,7 +1,7 @@
 package com.danzigstudio.Social.Medium.Demo.post;
 
+import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.comment.Comment;
-import com.danzigstudio.Social.Medium.Demo.user.User;
 import lombok.NoArgsConstructor;
 
 
@@ -23,8 +23,8 @@ public class Post {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="id_user")
-    private User user;
+    @JoinColumn(name="id_profile")
+    private Profile profile;
 
     @Column
     private Integer likeReaction;
@@ -38,23 +38,24 @@ public class Post {
     @Column
     private LocalDateTime timeRecord;
 
-
-    private Post(final Post.Builder builder) {
+    private Post(final Builder builder) {
         this.id = builder.id;
         this.description = builder.description;
-        this.user = builder.user;
+        this.profile = builder.profile;
         this.likeReaction = builder.likeReaction;
         this.unlikeReaction = builder.unlikeReaction;
         this.timeRecord = builder.timeRecord;
+        this.comments = builder.comments;
     }
 
     public static class Builder {
         private Long id;
         private String description;
-        private User user;
+        private Profile profile;
         private Integer likeReaction;
         private Integer unlikeReaction;
         private LocalDateTime timeRecord;
+        private List<Comment> comments;
 
         public Builder() {
         }
@@ -67,8 +68,8 @@ public class Post {
             this.description = description;
             return this;
         }
-        public Builder user(User user) {
-            this.user = user;
+        public Builder profile(Profile profile) {
+            this.profile = profile;
             return this;
         }
         public Builder likeReaction(Integer likeReaction) {
@@ -85,6 +86,11 @@ public class Post {
             return this;
         }
 
+        public Builder comments(List<Comment> comments) {
+            this.comments = comments;
+            return this;
+        }
+
         public Post build(){
             return new Post(this);
         }
@@ -98,8 +104,8 @@ public class Post {
         return description;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 
     public Integer getLikeReaction() {

@@ -1,0 +1,9 @@
+DROP TABLE t_follow;
+CREATE TABLE t_follow (
+   id serial NOT NULL PRIMARY KEY,
+   id_following integer NOT NULL,
+	id_followed integer NOT NULL
+) ;
+
+
+SELECT * FROM t_follow;

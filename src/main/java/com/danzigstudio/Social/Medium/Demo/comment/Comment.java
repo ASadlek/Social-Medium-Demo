@@ -1,7 +1,7 @@
 package com.danzigstudio.Social.Medium.Demo.comment;
 
+import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.post.Post;
-import com.danzigstudio.Social.Medium.Demo.user.User;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -20,8 +20,8 @@ public class Comment {
     private String textContent;
 
     @ManyToOne
-    @JoinColumn(name="id_user")
-    private User user;
+    @JoinColumn(name="id_profile")
+    private Profile profile;
 
     @ManyToOne
     @JoinColumn(name="id_post")
@@ -40,7 +40,7 @@ public class Comment {
     private Comment(final Builder builder) {
         this.id = builder.id;
         this.textContent = builder.textContent;
-        this.user = builder.user;
+        this.profile= builder.profile;
         this.post = builder.post;
         this.likeReaction = builder.likeReaction;
         this.unlikeReaction = builder.unlikeReaction;
@@ -50,7 +50,7 @@ public class Comment {
     public static class Builder {
         private Long id;
         private String textContent;
-        private User user;
+        private Profile profile;
         private Post post;
         private Integer likeReaction;
         private Integer unlikeReaction;
@@ -67,8 +67,8 @@ public class Comment {
             this.textContent = textContent;
             return this;
         }
-        public Builder user(User user) {
-            this.user = user;
+        public Builder profile(Profile profile) {
+            this.profile = profile;
             return this;
         }
         public Builder post(Post post) {
@@ -100,8 +100,8 @@ public class Comment {
         return textContent;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 
     public Post getPost() {

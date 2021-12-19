@@ -1,11 +1,11 @@
 package com.danzigstudio.Social.Medium.Demo.reaction;
 
+import com.danzigstudio.Social.Medium.Demo.profile.Profile;
+import com.danzigstudio.Social.Medium.Demo.profile.ProfileService;
 import com.danzigstudio.Social.Medium.Demo.comment.Comment;
 import com.danzigstudio.Social.Medium.Demo.comment.CommentService;
 import com.danzigstudio.Social.Medium.Demo.post.Post;
 import com.danzigstudio.Social.Medium.Demo.post.PostService;
-import com.danzigstudio.Social.Medium.Demo.user.User;
-import com.danzigstudio.Social.Medium.Demo.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +20,14 @@ import static com.danzigstudio.Social.Medium.Demo.reaction.ReactionMapper.reacti
 public class ReactionController {
 
     private final ReactionService reactionService;
-    private final UserService userService;
+    private final ProfileService profileService;
     private final PostService postService;
     private final CommentService commentService;
 
     @Autowired
-    public ReactionController(ReactionService reactionService, UserService userService, PostService postService, CommentService commentService) {
+    public ReactionController(ReactionService reactionService, ProfileService profileService, PostService postService, CommentService commentService) {
         this.reactionService = reactionService;
-        this.userService = userService;
+        this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
     }
@@ -35,18 +35,18 @@ public class ReactionController {
     @PostMapping("/add/comment")
     @ResponseStatus(HttpStatus.CREATED)
     public void addReactionToComment (@RequestBody ReactionDTO reactionDTO){
-        User user = userService.userById(reactionDTO.getIdUser()).get();
+        Profile profile = profileService.profileById(reactionDTO.getIdProfile()).get();
         Comment comment = commentService.commentById(reactionDTO.getIdObject()).get();
-        reactionService.addReaction(reactionDTOToCommentReaction(reactionDTO, user, comment));
+        reactionService.addReaction(reactionDTOToCommentReaction(reactionDTO, profile, comment));
         commentService.addComment(commentReactionInitializer(ReactionType.valueOf(reactionDTO.getReactionType()), comment));
     }
 
     @PostMapping("/add/post")
     @ResponseStatus(HttpStatus.CREATED)
     public void addReactionToPost (@RequestBody ReactionDTO reactionDTO){
-        User user = userService.userById(reactionDTO.getIdUser()).get();
+        Profile profile = profileService.profileById(reactionDTO.getIdProfile()).get();
         Post post = postService.postById(reactionDTO.getIdObject()).get();
-        reactionService.addReaction(reactionDTOToPostReaction(reactionDTO, user, post));
+        reactionService.addReaction(reactionDTOToPostReaction(reactionDTO, profile, post));
         postService.addPost(postReactionInitializer(ReactionType.valueOf(reactionDTO.getReactionType()), post));
 
     }

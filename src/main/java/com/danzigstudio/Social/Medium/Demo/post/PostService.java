@@ -1,5 +1,6 @@
 package com.danzigstudio.Social.Medium.Demo.post;
 
+import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +35,13 @@ public class PostService {
         Pageable pageByNumberAndElementsNumber = PageRequest.of(pageNumber, elementsNumber, Sort.by("id"));
         Page<Post> postPage = postRepository.findAll(pageByNumberAndElementsNumber);
         return postPage.toList();
+    }
+    public void deletePost(Long id) { postRepository.deleteById(id);}
+
+    public List<Post> profileTimeline(int pageNumber, int elementsNumber, Profile profile) {
+        Pageable pageByNumberAndElementsNumber = PageRequest.of(pageNumber, elementsNumber, Sort.by("id"));
+        List<Post> postList = postRepository.findPostsByProfile(profile, pageByNumberAndElementsNumber);
+        return postList;
     }
 
 }

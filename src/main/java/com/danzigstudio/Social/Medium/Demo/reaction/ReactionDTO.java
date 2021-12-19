@@ -5,27 +5,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReactionDTO {
 
-    private Long idUser;
+    private Long idProfile;
     private String reactionType;
     private Long idObject;
 
     private ReactionDTO(final Builder builder) {
-        this.idUser = builder.idUser;
+        this.idProfile = builder.idProfile;
         this.reactionType = builder.reactionType;
         this.idObject = builder.idObject;
     }
 
 
     public static class Builder {
-        private Long idUser;
+        private Long idProfile;
         private String reactionType;
         private Long idObject;
 
         public Builder() {
         }
 
-        public Builder idUser(Long idUser) {
-            this.idUser = idUser;
+        public Builder idProfile(Long idProfile) {
+            this.idProfile = idProfile;
             return this;
         }
         public Builder reactionType(String reactionType) {
@@ -42,8 +42,8 @@ public class ReactionDTO {
         }
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getIdProfile() {
+        return idProfile;
     }
 
     public String getReactionType() {

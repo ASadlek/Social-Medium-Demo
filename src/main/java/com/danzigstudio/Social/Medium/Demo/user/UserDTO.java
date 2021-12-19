@@ -10,7 +10,6 @@ public class UserDTO {
     private String password;
     private String email;
     private String userRole;
-    private String bio;
     private Long id;
 
     private UserDTO(final Builder builder) {
@@ -20,11 +19,9 @@ public class UserDTO {
         this.email = builder.email;
         this.userRole = builder.userRole;
         this.id = builder.id;
-        this.bio = builder.bio;
     }
 
     public static class Builder{
-        public String bio;
         private String firstName;
         private String lastName;
         private String password;
@@ -59,10 +56,7 @@ public class UserDTO {
             this.id = id;
             return this;
         }
-        public Builder bio(String bio) {
-            this.bio = bio;
-            return this;
-        }
+
         public UserDTO build(){
             return new UserDTO(this);
         }
@@ -92,7 +86,5 @@ public class UserDTO {
         return id;
     }
 
-    public String getBio() {
-        return bio;
-    }
+
 }

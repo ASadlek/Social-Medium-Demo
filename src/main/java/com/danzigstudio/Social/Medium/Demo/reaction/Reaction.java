@@ -1,8 +1,8 @@
 package com.danzigstudio.Social.Medium.Demo.reaction;
 
+import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.comment.Comment;
 import com.danzigstudio.Social.Medium.Demo.post.Post;
-import com.danzigstudio.Social.Medium.Demo.user.User;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -17,8 +17,8 @@ public class Reaction {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id_user")
-    private User user;
+    @JoinColumn(name="id_profile")
+    private Profile profile;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -38,7 +38,7 @@ public class Reaction {
 
     private Reaction(final Builder builder) {
         this.id = builder.id;
-        this.user = builder.user;
+        this.profile = builder.profile;
         this.reactionType = builder.reactionType;
         this.reactionObjectType = builder.reactionObjectType;
         this.post = builder.post;
@@ -47,7 +47,7 @@ public class Reaction {
 
     public static class Builder {
         private Long id;
-        private User user;
+        private Profile profile;
         private ReactionType reactionType;
         private ReactionObjectType reactionObjectType;
         private Post post;
@@ -62,8 +62,8 @@ public class Reaction {
             return this;
         }
 
-        public Builder user(User user) {
-            this.user = user;
+        public Builder profile(Profile profile) {
+            this.profile = profile;
             return this;
         }
         public Builder reactionType(ReactionType reactionType) {
@@ -92,8 +92,8 @@ public class Reaction {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 
     public ReactionType getReactionType() {
@@ -110,5 +110,15 @@ public class Reaction {
 
     public Comment getComment() {
         return comment;
+    }
+
+
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 }

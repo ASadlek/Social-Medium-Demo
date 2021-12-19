@@ -6,27 +6,33 @@ import lombok.NoArgsConstructor;
 public class CommentDTO {
 
     private String textContent;
-    private Long idUser;
+    private Long idProfile;
     private Long idPost;
+    private int numberOfLikeReactions;
+    private int numberOfUnlikeReactions;
 
     private CommentDTO(final Builder builder) {
         this.textContent = builder.textContent;
-        this.idUser = builder.idUser;
+        this.idProfile = builder.idProfile;
         this.idPost = builder.idPost;
+        this.numberOfLikeReactions = builder.numberOfLikeReactions;
+        this.numberOfUnlikeReactions = builder.numberOfUnlikeReactions;
     }
 
 
     public static class Builder {
         private String textContent;
-        private Long idUser;
+        private Long idProfile;
         private Long idPost;
+        private int numberOfLikeReactions;
+        private int numberOfUnlikeReactions;
 
 
         public Builder() {
         }
 
-        public Builder idUser(Long idUser) {
-            this.idUser = idUser;
+        public Builder idProfile(Long idProfile) {
+            this.idProfile = idProfile;
             return this;
         }
 
@@ -38,6 +44,15 @@ public class CommentDTO {
             this.textContent = textContent;
             return this;
         }
+        public Builder numberOfLikeReactions(int numberOfLikeReactions) {
+            this.numberOfLikeReactions = numberOfLikeReactions;
+            return this;
+        }
+        public Builder numberOfUnlikeReactions(int numberOfUnlikeReactions) {
+            this.numberOfUnlikeReactions = numberOfUnlikeReactions;
+            return this;
+        }
+
 
         public CommentDTO build(){
             return new CommentDTO(this);
@@ -48,11 +63,20 @@ public class CommentDTO {
         return textContent;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getIdProfile() {
+        return idProfile;
     }
 
     public Long getIdPost() {
         return idPost;
     }
+
+    public int getNumberOfLikeReactions() {
+        return numberOfLikeReactions;
+    }
+
+    public int getNumberOfUnlikeReactions() {
+        return numberOfUnlikeReactions;
+    }
+
 }
