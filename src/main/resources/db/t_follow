@@ -7,3 +7,5 @@ CREATE TABLE t_follow (
 
 
 SELECT * FROM t_follow;
+
+DELETE FROM t_follow WHERE id_following='1' and id_followed='3';

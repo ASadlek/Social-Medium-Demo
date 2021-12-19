@@ -160,4 +160,8 @@ public class Profile {
     public List<Follow> getFollowedList() {
         return followedList;
     }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 }

@@ -25,6 +25,14 @@ public class ProfileController {
         return profileToProfileDTO(profile);
     }
 
+    @PostMapping("/{id}/add/bio")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addBio(@PathVariable("id") Long id, @RequestBody ProfileDTO profileDTO){
+        Profile profile = profileService.profileById(id).get();
+        profile.setBio(profileDTO.getBio());
+        profileService.addProfile(profile);
+    }
+
 
 
 

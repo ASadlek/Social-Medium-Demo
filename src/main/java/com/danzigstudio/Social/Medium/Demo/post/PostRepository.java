@@ -15,5 +15,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.profile = :profile")
     public List<Post> findPostsByProfile(@Param("profile") Profile profile, Pageable pageable);
 
+    @Query("select p from Post p where p.profile = :profile")
+    public List<Post> followedPosts(@Param("profile") Profile profile);
 
 }

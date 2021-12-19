@@ -2,12 +2,11 @@ package com.danzigstudio.Social.Medium.Demo.post;
 
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +41,16 @@ public class PostService {
         Pageable pageByNumberAndElementsNumber = PageRequest.of(pageNumber, elementsNumber, Sort.by("id"));
         List<Post> postList = postRepository.findPostsByProfile(profile, pageByNumberAndElementsNumber);
         return postList;
+    }
+    public List<Post> followedTimeline(int pageNumber, int elementsNumber, List<Profile> profiles) {
+        List<Post> posts = new ArrayList<>();
+        for(Profile profile : profiles) {
+            posts.addAll(postRepository.followedPosts(profile));
+        }
+        PagedListHolder page = new PagedListHolder(posts);
+        page.setPageSize(elementsNumber);
+        page.setPage(pageNumber);
+        return page.getPageList();
     }
 
 }
