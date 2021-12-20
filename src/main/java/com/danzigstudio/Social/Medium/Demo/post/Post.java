@@ -2,6 +2,7 @@ package com.danzigstudio.Social.Medium.Demo.post;
 
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.comment.Comment;
+import com.danzigstudio.Social.Medium.Demo.reaction.Reaction;
 import lombok.NoArgsConstructor;
 
 
@@ -32,8 +33,11 @@ public class Post {
     @Column
     private Integer unlikeReaction;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Reaction> reactions = new ArrayList<>();
 
     @Column
     private LocalDateTime timeRecord;
@@ -46,6 +50,7 @@ public class Post {
         this.unlikeReaction = builder.unlikeReaction;
         this.timeRecord = builder.timeRecord;
         this.comments = builder.comments;
+        this.reactions = builder.reactions;
     }
 
     public static class Builder {
@@ -56,6 +61,7 @@ public class Post {
         private Integer unlikeReaction;
         private LocalDateTime timeRecord;
         private List<Comment> comments;
+        private List<Reaction> reactions;
 
         public Builder() {
         }
@@ -88,6 +94,10 @@ public class Post {
 
         public Builder comments(List<Comment> comments) {
             this.comments = comments;
+            return this;
+        }
+        public Builder reactions(List<Reaction> reactions) {
+            this.reactions = reactions;
             return this;
         }
 
@@ -124,11 +134,19 @@ public class Post {
         return timeRecord;
     }
 
+    public List<Reaction> getReactions() {
+        return reactions;
+    }
+
     public void setLikeReaction(Integer likeReaction) {
         this.likeReaction = likeReaction;
     }
 
     public void setUnlikeReaction(Integer unlikeReaction) {
         this.unlikeReaction = unlikeReaction;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

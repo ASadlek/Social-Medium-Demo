@@ -33,19 +33,19 @@ public class Profile {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Reaction> reactions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "following")
+    @OneToMany(mappedBy = "following", cascade = CascadeType.ALL)
     private List<Follow> followingList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "followed")
+    @OneToMany(mappedBy = "followed", cascade = CascadeType.ALL)
     private List<Follow> followedList = new ArrayList<>();
 
     private Profile(final Builder builder) {

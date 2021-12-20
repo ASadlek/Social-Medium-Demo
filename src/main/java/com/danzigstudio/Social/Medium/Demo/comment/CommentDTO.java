@@ -2,31 +2,38 @@ package com.danzigstudio.Social.Medium.Demo.comment;
 
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 public class CommentDTO {
 
     private String textContent;
     private Long idProfile;
+    private Long idComment;
     private Long idPost;
     private int numberOfLikeReactions;
     private int numberOfUnlikeReactions;
+    private LocalDateTime timeRecord;
 
     private CommentDTO(final Builder builder) {
         this.textContent = builder.textContent;
         this.idProfile = builder.idProfile;
-        this.idPost = builder.idPost;
+        this.idComment = builder.idComment;
         this.numberOfLikeReactions = builder.numberOfLikeReactions;
         this.numberOfUnlikeReactions = builder.numberOfUnlikeReactions;
+        this.timeRecord = builder.timeRecord;
+        this.idPost = builder.idPost;
     }
 
 
     public static class Builder {
         private String textContent;
         private Long idProfile;
-        private Long idPost;
+        private Long idComment;
         private int numberOfLikeReactions;
         private int numberOfUnlikeReactions;
-
+        private LocalDateTime timeRecord;
+        private Long idPost;
 
         public Builder() {
         }
@@ -36,6 +43,10 @@ public class CommentDTO {
             return this;
         }
 
+        public Builder idComment(Long idComment) {
+            this.idComment = idComment;
+            return this;
+        }
         public Builder idPost(Long idPost) {
             this.idPost = idPost;
             return this;
@@ -52,11 +63,19 @@ public class CommentDTO {
             this.numberOfUnlikeReactions = numberOfUnlikeReactions;
             return this;
         }
+        public Builder timeRecord(LocalDateTime timeRecord) {
+            this.timeRecord = timeRecord;
+            return this;
+        }
 
 
         public CommentDTO build(){
             return new CommentDTO(this);
         }
+    }
+
+    public LocalDateTime getTimeRecord() {
+        return timeRecord;
     }
 
     public String getTextContent() {
@@ -65,6 +84,10 @@ public class CommentDTO {
 
     public Long getIdProfile() {
         return idProfile;
+    }
+
+    public Long getIdComment() {
+        return idComment;
     }
 
     public Long getIdPost() {

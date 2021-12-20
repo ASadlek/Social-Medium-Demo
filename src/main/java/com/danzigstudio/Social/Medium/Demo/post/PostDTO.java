@@ -2,14 +2,18 @@ package com.danzigstudio.Social.Medium.Demo.post;
 
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 public class PostDTO {
 
     private String description;
     private Long idProfile;
+    private Long idPost;
     private int numberOfLikeReactions;
     private int numberOfUnlikeReactions;
     private int numberOfComments;
+    private LocalDateTime timeRecord;
 
     private PostDTO(final Builder builder) {
         this.description = builder.description;
@@ -17,15 +21,19 @@ public class PostDTO {
         this.numberOfLikeReactions = builder.numberOfLikeReactions;
         this.numberOfUnlikeReactions = builder.numberOfUnlikeReactions;
         this.numberOfComments = builder.numberOfComments;
+        this.timeRecord = builder.timeRecord;
+        this.idPost = builder.idPost;
     }
 
 
     public static class Builder {
         private String description;
         private Long idProfile;
+        private Long idPost;
         private int numberOfLikeReactions;
         private int numberOfUnlikeReactions;
         private int numberOfComments;
+        private LocalDateTime timeRecord;
 
 
         public Builder() {
@@ -51,6 +59,14 @@ public class PostDTO {
             this.numberOfComments = numberOfComments;
             return this;
         }
+        public Builder timeRecord(LocalDateTime timeRecord) {
+            this.timeRecord = timeRecord;
+            return this;
+        }
+        public Builder idPost(Long idPost) {
+            this.idPost = idPost;
+            return this;
+        }
 
         public PostDTO build(){
             return new PostDTO(this);
@@ -67,6 +83,14 @@ public class PostDTO {
 
     public int getNumberOfLikeReactions() {
         return numberOfLikeReactions;
+    }
+
+    public Long getIdPost() {
+        return idPost;
+    }
+
+    public LocalDateTime getTimeRecord() {
+        return timeRecord;
     }
 
     public int getNumberOfUnlikeReactions() {

@@ -15,6 +15,7 @@ import java.util.List;
 import static com.danzigstudio.Social.Medium.Demo.follow.FollowMapper.followedToProfileDTO;
 import static com.danzigstudio.Social.Medium.Demo.post.PostMapper.postDTOToPost;
 import static com.danzigstudio.Social.Medium.Demo.post.PostMapper.postToPostDTO;
+import static com.danzigstudio.Social.Medium.Demo.profile.ProfileMapper.profileToProfileDTO;
 
 @RestController
 @RequestMapping(path = "post")
@@ -38,12 +39,25 @@ public class PostController {
         postService.addPost(postDTOToPost(postDTO, profile));
     }
 
+    @PostMapping("/{postId}/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updatePost(@PathVariable("postId") Long postId, @RequestBody PostDTO postDTO){
+        Post post = postService.postById(postId).get();
+        post.setDescription(postDTO.getDescription());
+        postService.addPost(post);
+    }
+
     @GetMapping("/timeline/all/page:{pageNumber}/{elementsNumber}")
     @ResponseStatus(HttpStatus.FOUND)
     public List<PostDTO> getTimeline(Pageable pageable, @PathVariable("pageNumber") int pageNumber, @PathVariable("elementsNumber") int elementsNumber) {
        return postToPostDTO(postService.timeline(pageNumber,elementsNumber));
     }
-
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public PostDTO getPostById(@PathVariable("id") Long id) {
+        Post post = postService.postById(id).get();
+        return postToPostDTO(post);
+    }
     @DeleteMapping("/delete/{postId}")
     @ResponseStatus(HttpStatus.OK)
     public void deletePost(@PathVariable("postId") Long postId) {

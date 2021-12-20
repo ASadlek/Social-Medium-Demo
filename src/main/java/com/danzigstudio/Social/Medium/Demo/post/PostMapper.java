@@ -26,6 +26,8 @@ public class PostMapper {
                    .numberOfLikeReactions(post.getLikeReaction())
                    .numberOfUnlikeReactions(post.getUnlikeReaction())
                    .numberOfComments(post.getComments().size())
+                   .timeRecord(post.getTimeRecord())
+                   .idPost(post.getId())
                    .build();
     }
 

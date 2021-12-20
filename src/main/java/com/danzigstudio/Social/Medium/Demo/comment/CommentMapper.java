@@ -1,6 +1,5 @@
 package com.danzigstudio.Social.Medium.Demo.comment;
 
-import com.danzigstudio.Social.Medium.Demo.post.PostDTO;
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.post.Post;
 
@@ -27,6 +26,8 @@ public class CommentMapper {
                 .idProfile(comment.getProfile().getId())
                 .numberOfLikeReactions(comment.getLikeReaction())
                 .numberOfUnlikeReactions(comment.getUnlikeReaction())
+                .timeRecord(comment.getTimeRecord())
+                .idComment(comment.getId())
                 .build();
     }
     public static List<CommentDTO> commentToCommentDTO(List<Comment> comments) {

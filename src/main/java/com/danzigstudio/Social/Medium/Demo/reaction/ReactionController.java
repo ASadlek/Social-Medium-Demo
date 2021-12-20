@@ -48,6 +48,10 @@ public class ReactionController {
         Post post = postService.postById(reactionDTO.getIdObject()).get();
         reactionService.addReaction(reactionDTOToPostReaction(reactionDTO, profile, post));
         postService.addPost(postReactionInitializer(ReactionType.valueOf(reactionDTO.getReactionType()), post));
-
+    }
+    @DeleteMapping("/delete/{reactionId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteReaction(@PathVariable("reactionId") Long reactionId) {
+        reactionService.deleteReaction(reactionId);
     }
 }

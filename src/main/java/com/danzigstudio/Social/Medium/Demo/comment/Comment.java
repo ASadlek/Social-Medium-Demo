@@ -2,10 +2,13 @@ package com.danzigstudio.Social.Medium.Demo.comment;
 
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.post.Post;
+import com.danzigstudio.Social.Medium.Demo.reaction.Reaction;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "t_comment")
@@ -36,6 +39,9 @@ public class Comment {
     @Column
     private LocalDateTime timeRecord;
 
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    private List<Reaction> reactions = new ArrayList<>();
+
 
     private Comment(final Builder builder) {
         this.id = builder.id;
@@ -45,6 +51,7 @@ public class Comment {
         this.likeReaction = builder.likeReaction;
         this.unlikeReaction = builder.unlikeReaction;
         this.timeRecord = builder.timeRecord;
+        this.reactions = builder.reactions;
     }
 
     public static class Builder {
@@ -55,6 +62,7 @@ public class Comment {
         private Integer likeReaction;
         private Integer unlikeReaction;
         private LocalDateTime timeRecord;
+        private List<Reaction> reactions;
 
         public Builder() {
         }
@@ -85,6 +93,10 @@ public class Comment {
         }
         public Builder timeRecord(LocalDateTime timeRecord) {
             this.timeRecord = timeRecord;
+            return this;
+        }
+        public Builder reactions(List<Reaction> reactions) {
+            this.reactions = reactions;
             return this;
         }
         public Comment build(){
@@ -120,11 +132,19 @@ public class Comment {
         return timeRecord;
     }
 
+    public List<Reaction> getReactions() {
+        return reactions;
+    }
+
     public void setLikeReaction(Integer likeReaction) {
         this.likeReaction = likeReaction;
     }
 
     public void setUnlikeReaction(Integer unlikeReaction) {
         this.unlikeReaction = unlikeReaction;
+    }
+
+    public void setTextContent(String textContent) {
+        this.textContent = textContent;
     }
 }

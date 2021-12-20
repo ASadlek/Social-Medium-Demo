@@ -16,4 +16,6 @@ public class ReactionService {
     public Reaction addReaction (Reaction reaction){
         return reactionRepository.save(reaction);
     }
+
+    public void deleteReaction(Long id) { reactionRepository.deleteById(id);}
 }
