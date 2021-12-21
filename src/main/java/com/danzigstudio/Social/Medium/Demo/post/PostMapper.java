@@ -16,6 +16,7 @@ public class PostMapper {
                 .unlikeReaction(0)
                 .profile(profile)
                 .timeRecord(LocalDateTime.now())
+                .sharedPostId(postDTO.getSharedPostId())
                 .build();
     }
 
@@ -28,6 +29,7 @@ public class PostMapper {
                    .numberOfComments(post.getComments().size())
                    .timeRecord(post.getTimeRecord())
                    .idPost(post.getId())
+                   .sharedPostId(post.getSharedPostId())
                    .build();
     }
 
@@ -38,9 +40,4 @@ public class PostMapper {
         }
         return postDTOS;
     }
-   /* public static List<Post> timelinePosts(Long id) {
-        List<Post> timelineResponse = new ArrayList<>();
-
-        return timelineResponse;
-    }*/
 }

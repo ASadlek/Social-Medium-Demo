@@ -14,6 +14,7 @@ public class PostDTO {
     private int numberOfUnlikeReactions;
     private int numberOfComments;
     private LocalDateTime timeRecord;
+    private Long sharedPostId;
 
     private PostDTO(final Builder builder) {
         this.description = builder.description;
@@ -23,6 +24,7 @@ public class PostDTO {
         this.numberOfComments = builder.numberOfComments;
         this.timeRecord = builder.timeRecord;
         this.idPost = builder.idPost;
+        this.sharedPostId = builder.sharedPostId;
     }
 
 
@@ -34,6 +36,7 @@ public class PostDTO {
         private int numberOfUnlikeReactions;
         private int numberOfComments;
         private LocalDateTime timeRecord;
+        private Long sharedPostId;
 
 
         public Builder() {
@@ -65,6 +68,10 @@ public class PostDTO {
         }
         public Builder idPost(Long idPost) {
             this.idPost = idPost;
+            return this;
+        }
+        public Builder sharedPostId(Long sharedPostId) {
+            this.sharedPostId = sharedPostId;
             return this;
         }
 
@@ -99,5 +106,9 @@ public class PostDTO {
 
     public int getNumberOfComments() {
         return numberOfComments;
+    }
+
+    public Long getSharedPostId() {
+        return sharedPostId;
     }
 }

@@ -42,6 +42,9 @@ public class Post {
     @Column
     private LocalDateTime timeRecord;
 
+    @Column
+    private Long sharedPostId;
+
     private Post(final Builder builder) {
         this.id = builder.id;
         this.description = builder.description;
@@ -51,6 +54,7 @@ public class Post {
         this.timeRecord = builder.timeRecord;
         this.comments = builder.comments;
         this.reactions = builder.reactions;
+        this.sharedPostId = builder.sharedPostId;
     }
 
     public static class Builder {
@@ -62,6 +66,7 @@ public class Post {
         private LocalDateTime timeRecord;
         private List<Comment> comments;
         private List<Reaction> reactions;
+        private Long sharedPostId;
 
         public Builder() {
         }
@@ -98,6 +103,10 @@ public class Post {
         }
         public Builder reactions(List<Reaction> reactions) {
             this.reactions = reactions;
+            return this;
+        }
+        public Builder sharedPostId(Long sharedPostId) {
+            this.sharedPostId = sharedPostId;
             return this;
         }
 
@@ -137,6 +146,11 @@ public class Post {
     public List<Reaction> getReactions() {
         return reactions;
     }
+
+    public Long getSharedPostId() {
+        return sharedPostId;
+    }
+
 
     public void setLikeReaction(Integer likeReaction) {
         this.likeReaction = likeReaction;

@@ -82,7 +82,9 @@ public class PostController {
         }
         return postToPostDTO(postService.followedTimeline(pageNumber, elementsNumber, profiles));
     }
-    //@GetMapping("/{idPostToShare}/{idProfile}")
-    //@ResponseStatus(HttpStatus.CREATED)
+   /* @GetMapping("/{idPostToShare}/{idProfile}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PostDTO getPostById(@PathVariable("id") Long id) {
 
+    }*/
 }
