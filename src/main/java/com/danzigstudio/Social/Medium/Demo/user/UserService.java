@@ -1,5 +1,6 @@
 package com.danzigstudio.Social.Medium.Demo.user;
 
+import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
