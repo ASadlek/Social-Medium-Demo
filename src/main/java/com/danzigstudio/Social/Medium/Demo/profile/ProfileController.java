@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 import static com.danzigstudio.Social.Medium.Demo.profile.ProfileMapper.profileToProfileDTO;
 
 
@@ -26,13 +29,46 @@ public class ProfileController {
     }
 
     @PostMapping("/{id}/add/bio")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.FOUND)
     public void addBio(@PathVariable("id") Long id, @RequestBody ProfileDTO profileDTO){
         Profile profile = profileService.profileById(id).get();
         profile.setBio(profileDTO.getBio());
         profileService.addProfile(profile);
     }
 
+    @GetMapping("/find/first_name")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<ProfileDTO> findByFirstName(@RequestParam String firstName){
+        return  profileToProfileDTO(profileService.profileByFirstName(firstName));
+    }
+
+    @GetMapping("/find/last_name")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<ProfileDTO> findByLastName(@RequestParam String lastName){
+        return  profileToProfileDTO(profileService.profileByLastName(lastName));
+    }
+
+    @GetMapping("/find/full_name")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<ProfileDTO> findByFullName(@RequestParam Map<String,String> fullName){
+        String firstName = fullName.get("firstName");
+        String lastName = fullName.get("lastName");
+        return  profileToProfileDTO(profileService.profileByFullName(firstName, lastName));
+    }
+
+   /* @PostMapping("/find/last_name")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Profile> findByLastName(@RequestBody ProfileDTO profileDTO){
+        return  profileService.profileByLastName(profileDTO.getLastName());
+    }
+    @PostMapping("/find/full_name")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Profile> findByFullName(@RequestBody ProfileDTO profileDTO){
+        return  profileService.profileByFullName(profileDTO.getFirstName(), profileDTO.getLastName());
+    }*/
 
 
 

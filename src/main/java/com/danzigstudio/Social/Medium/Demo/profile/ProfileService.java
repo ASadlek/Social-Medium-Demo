@@ -3,6 +3,7 @@ package com.danzigstudio.Social.Medium.Demo.profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -21,5 +22,18 @@ public class ProfileService {
     }
 
     public Profile addProfile(Profile profile){ return profileRepository.save(profile);}
+
+    public List<Profile> profileByFirstName(String firstName){
+
+        return profileRepository.findByFirstName(firstName);
+    }
+
+    public List<Profile> profileByLastName(String lastName){
+        return profileRepository.findByLastName(lastName);
+    }
+
+    public List<Profile> profileByFullName(String firstName, String lastName){
+        return profileRepository.findByFullName(firstName, lastName);
+    }
 
 }

@@ -1,6 +1,11 @@
 package com.danzigstudio.Social.Medium.Demo.profile;
 
+import com.danzigstudio.Social.Medium.Demo.post.Post;
+import com.danzigstudio.Social.Medium.Demo.post.PostDTO;
 import com.danzigstudio.Social.Medium.Demo.user.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileMapper {
 
@@ -19,6 +24,14 @@ public class ProfileMapper {
                 .bio(profile.getBio())
                 .id(profile.getId())
                 .build();
+    }
+
+    public static List<ProfileDTO> profileToProfileDTO(List<Profile> profiles) {
+        List<ProfileDTO> profileDTOS = new ArrayList<>();
+        for(Profile profile : profiles) {
+            profileDTOS.add(profileToProfileDTO(profile));
+        }
+        return profileDTOS;
     }
 
 
