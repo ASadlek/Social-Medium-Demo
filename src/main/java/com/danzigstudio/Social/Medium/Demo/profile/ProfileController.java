@@ -59,19 +59,20 @@ public class ProfileController {
         return  profileToProfileDTO(profileService.profileByFullName(firstName, lastName));
     }
 
-   /* @PostMapping("/find/last_name")
+    @GetMapping("/find")
+    @ResponseBody
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Profile> findByLastName(@RequestBody ProfileDTO profileDTO){
-        return  profileService.profileByLastName(profileDTO.getLastName());
+    public List<ProfileDTO> findByName(@RequestParam Map<String,String> fullName){
+        String firstName = fullName.get("firstName");
+        String lastName = fullName.get("lastName");
+        if(firstName != null && !firstName.trim().isEmpty() && lastName != null && !lastName.trim().isEmpty()){
+            return  profileToProfileDTO(profileService.profileByFullName(firstName, lastName));
+        } else if (firstName != null && !firstName.trim().isEmpty()){
+            return  profileToProfileDTO(profileService.profileByFirstName(firstName));
+        } else {
+            return  profileToProfileDTO(profileService.profileByLastName(lastName));
+        }
     }
-    @PostMapping("/find/full_name")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Profile> findByFullName(@RequestBody ProfileDTO profileDTO){
-        return  profileService.profileByFullName(profileDTO.getFirstName(), profileDTO.getLastName());
-    }*/
-
-
-
 
 
 }

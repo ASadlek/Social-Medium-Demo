@@ -1,7 +1,5 @@
 package com.danzigstudio.Social.Medium.Demo.profile;
 
-import com.danzigstudio.Social.Medium.Demo.post.Post;
-import com.danzigstudio.Social.Medium.Demo.post.PostDTO;
 import com.danzigstudio.Social.Medium.Demo.user.User;
 
 import java.util.ArrayList;
@@ -33,7 +31,5 @@ public class ProfileMapper {
         }
         return profileDTOS;
     }
-
-
 }
 

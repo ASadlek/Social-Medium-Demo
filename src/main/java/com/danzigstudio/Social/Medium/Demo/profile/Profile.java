@@ -1,5 +1,6 @@
 package com.danzigstudio.Social.Medium.Demo.profile;
 
+import com.danzigstudio.Social.Medium.Demo.block.Block;
 import com.danzigstudio.Social.Medium.Demo.comment.Comment;
 import com.danzigstudio.Social.Medium.Demo.follow.Follow;
 import com.danzigstudio.Social.Medium.Demo.post.Post;
@@ -48,6 +49,12 @@ public class Profile {
     @OneToMany(mappedBy = "followed", cascade = CascadeType.ALL)
     private List<Follow> followedList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "blocker", cascade = CascadeType.ALL)
+    private List<Block> blockerList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "blocked", cascade = CascadeType.ALL)
+    private List<Block> blockedList = new ArrayList<>();
+
     private Profile(final Builder builder) {
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
@@ -59,6 +66,8 @@ public class Profile {
         this.reactions = builder.reactions;
         this.followingList = builder.followingList;
         this.followedList = builder.followedList;
+        this.blockerList = builder.blockerList;
+        this.blockedList = builder.blockedList;
     }
 
     public static class Builder{
@@ -72,6 +81,8 @@ public class Profile {
         private List<Reaction> reactions;
         private List<Follow> followingList;
         private List<Follow> followedList;
+        private List<Block> blockerList;
+        private List<Block> blockedList;
 
         public Builder() {
         }
@@ -114,6 +125,14 @@ public class Profile {
         }
         public Builder followedList(List<Follow> followedList) {
             this.followedList = followedList;
+            return this;
+        }
+        public Builder blockerList(List<Block> blockerList) {
+            this.blockerList = blockerList;
+            return this;
+        }
+        public Builder blockedList(List<Block> blockedList) {
+            this.blockedList = blockedList;
             return this;
         }
         public Profile build(){
@@ -159,6 +178,14 @@ public class Profile {
 
     public List<Follow> getFollowedList() {
         return followedList;
+    }
+
+    public List<Block> getBlockerList() {
+        return blockerList;
+    }
+
+    public List<Block> getBlockedList() {
+        return blockedList;
     }
 
     public void setBio(String bio) {

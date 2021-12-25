@@ -1,0 +1,9 @@
+DROP TABLE t_block;
+CREATE TABLE t_block (
+   id serial NOT NULL PRIMARY KEY,
+   id_blocker integer NOT NULL,
+	id_blocked integer NOT NULL
+) ;
+
+
+SELECT * FROM t_block;

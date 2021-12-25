@@ -1,7 +1,6 @@
 package com.danzigstudio.Social.Medium.Demo.comment;
 
 import com.danzigstudio.Social.Medium.Demo.post.Post;
-import com.danzigstudio.Social.Medium.Demo.post.PostDTO;
 import com.danzigstudio.Social.Medium.Demo.post.PostService;
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.profile.ProfileService;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import static com.danzigstudio.Social.Medium.Demo.comment.CommentMapper.commentDTOToComment;
 import static com.danzigstudio.Social.Medium.Demo.comment.CommentMapper.commentToCommentDTO;
-import static com.danzigstudio.Social.Medium.Demo.post.PostMapper.postToPostDTO;
 
 @RestController
 @RequestMapping(path = "comment")
