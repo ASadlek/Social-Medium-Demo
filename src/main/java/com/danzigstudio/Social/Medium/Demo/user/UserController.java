@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 import static com.danzigstudio.Social.Medium.Demo.profile.ProfileMapper.createProfile;
 import static com.danzigstudio.Social.Medium.Demo.user.UserMapper.userDTOToUser;
 import static com.danzigstudio.Social.Medium.Demo.user.UserMapper.userToUserDTO;
@@ -28,8 +26,11 @@ public class UserController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerUser(@RequestBody UserDTO userDTO) {
-        User user = userService.addUser(userDTOToUser(userDTO));
-        profileService.addProfile(createProfile(user));
+        User user = userDTOToUser(userDTO);
+        if(userService.checkNames(user)){
+            userService.addUser(user);
+            profileService.addProfile(createProfile(user));}
+        else throw new IllegalArgumentException("Only letters can be used in names");
     }
 
     @GetMapping("/{id}")

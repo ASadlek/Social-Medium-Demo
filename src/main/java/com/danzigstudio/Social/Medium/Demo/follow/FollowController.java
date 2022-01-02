@@ -1,19 +1,14 @@
 package com.danzigstudio.Social.Medium.Demo.follow;
 
-import com.danzigstudio.Social.Medium.Demo.comment.CommentDTO;
-import com.danzigstudio.Social.Medium.Demo.post.Post;
-import com.danzigstudio.Social.Medium.Demo.post.PostDTO;
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.profile.ProfileDTO;
 import com.danzigstudio.Social.Medium.Demo.profile.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.danzigstudio.Social.Medium.Demo.comment.CommentMapper.commentToCommentDTO;
 import static com.danzigstudio.Social.Medium.Demo.follow.FollowMapper.*;
 
 @RestController
