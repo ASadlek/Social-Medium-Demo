@@ -19,7 +19,7 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
     public List<Follow> whoProfileFollowed(@Param("following") Profile following);
 
     @Query("select f from Follow f where f.following = :following and f.followed = :followed")
-    public List<Follow> followRelationCheck(@Param("following") Profile following, @Param("followed") Profile followed);
+    public Follow followRelationCheck(@Param("following") Profile following, @Param("followed") Profile followed);
 
     @Transactional
     @Modifying

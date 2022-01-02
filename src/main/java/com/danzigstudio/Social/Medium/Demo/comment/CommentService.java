@@ -23,7 +23,7 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public Optional<Comment> commentById (Long id){
+    public Optional<Comment> commentById (Long id) {
         return commentRepository.findById(id);
     }
 
@@ -34,5 +34,6 @@ public class CommentService {
     }
 
     public void deleteComment(Long id) { commentRepository.deleteById(id);}
+
 
 }

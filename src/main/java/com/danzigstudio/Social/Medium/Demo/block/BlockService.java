@@ -27,4 +27,8 @@ public class BlockService {
     public void deleteBlock(Profile blocker, Profile blocked){
         blockRepository.deleteBlock(blocker, blocked);
     }
+
+    public Boolean checkBlock(Profile blocker, Profile blocked){
+        return blockRepository.blockRelationCheck(blocker, blocked) == null;
+    }
 }

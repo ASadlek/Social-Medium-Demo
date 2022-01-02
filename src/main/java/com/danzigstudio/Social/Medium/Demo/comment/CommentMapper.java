@@ -1,9 +1,6 @@
 package com.danzigstudio.Social.Medium.Demo.comment;
-
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.post.Post;
-
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +20,7 @@ public class CommentMapper {
     public static CommentDTO commentToCommentDTO(Comment comment) {
         return new CommentDTO.Builder()
                 .textContent(comment.getTextContent())
+                .idPost(comment.getPost().getId())
                 .idProfile(comment.getProfile().getId())
                 .numberOfLikeReactions(comment.getLikeReaction())
                 .numberOfUnlikeReactions(comment.getUnlikeReaction())

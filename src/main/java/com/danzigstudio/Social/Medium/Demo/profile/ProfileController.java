@@ -74,5 +74,7 @@ public class ProfileController {
         }
     }
 
+    //usuwanie z wyszukiwań po wprowadzeniu security
+
 
 }

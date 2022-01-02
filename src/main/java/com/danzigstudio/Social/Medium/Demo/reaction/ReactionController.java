@@ -1,6 +1,7 @@
 package com.danzigstudio.Social.Medium.Demo.reaction;
 
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
+import com.danzigstudio.Social.Medium.Demo.profile.ProfileDTO;
 import com.danzigstudio.Social.Medium.Demo.profile.ProfileService;
 import com.danzigstudio.Social.Medium.Demo.comment.Comment;
 import com.danzigstudio.Social.Medium.Demo.comment.CommentService;
@@ -10,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+
 import static com.danzigstudio.Social.Medium.Demo.reaction.ReactionInitializer.commentReactionInitializer;
 import static com.danzigstudio.Social.Medium.Demo.reaction.ReactionInitializer.postReactionInitializer;
-import static com.danzigstudio.Social.Medium.Demo.reaction.ReactionMapper.reactionDTOToCommentReaction;
-import static com.danzigstudio.Social.Medium.Demo.reaction.ReactionMapper.reactionDTOToPostReaction;
+import static com.danzigstudio.Social.Medium.Demo.reaction.ReactionMapper.*;
 
 @RestController
 @RequestMapping(path = "reaction")
@@ -53,5 +54,40 @@ public class ReactionController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteReaction(@PathVariable("reactionId") Long reactionId) {
         reactionService.deleteReaction(reactionId);
+    }
+
+
+    @GetMapping("/check/post:{postId}/{profileId}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FOUND)
+    public Boolean postReactionCheck(@PathVariable("postId") Long postId, @PathVariable("profileId") Long profileId){
+       Post post = postService.postById(postId).get();
+       Profile profile = profileService.profileById(profileId).get();
+       return reactionService.reactionToPostCheck(profile, post);
+    }
+    @GetMapping("/check/comment:{commentId}/{profileId}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FOUND)
+    public Boolean commentReactionCheck(@PathVariable("commentId") Long commentId, @PathVariable("profileId") Long profileId){
+        Comment comment = commentService.commentById(commentId).get();
+        Profile profile = profileService.profileById(profileId).get();
+        return reactionService.reactionToCommentCheck(profile, comment);
+    }
+
+    @GetMapping("/checkType/comment:{commentId}/{profileId}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FOUND)
+    public ReactionDTO commentReactionTypeCheck(@PathVariable("commentId") Long commentId, @PathVariable("profileId") Long profileId){
+        Comment comment = commentService.commentById(commentId).get();
+        Profile profile = profileService.profileById(profileId).get();
+        return reactionToReactionDTO(reactionService.reactionTypeToCommentCheck(profile, comment));
+    }
+    @GetMapping("/checkType/post:{postId}/{profileId}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FOUND)
+    public ReactionDTO postReactionTypeCheck(@PathVariable("postId") Long postId, @PathVariable("profileId") Long profileId){
+        Post post = postService.postById(postId).get();
+        Profile profile = profileService.profileById(profileId).get();
+        return reactionToReactionDTO(reactionService.reactionTypeToPostCheck(profile, post));
     }
 }

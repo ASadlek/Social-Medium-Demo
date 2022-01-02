@@ -26,7 +26,7 @@ public class FollowService {
         return countingFollows( followRepository.whoProfileFollowed(profile).size(),followRepository.whoFollowedProfile(profile).size());
     }
     public Boolean checkFollow(Profile following, Profile followed){
-        return followRepository.followRelationCheck(following, followed).size() == 1;
+        return followRepository.followRelationCheck(following, followed) != null;
     }
 
     public List<Follow> whoProfileFollowedList(Profile profile){

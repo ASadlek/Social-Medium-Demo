@@ -26,4 +26,11 @@ public class ReactionMapper {
                 .post(post)
                 .build();
     }
+
+    public static ReactionDTO reactionToReactionDTO(Reaction reaction){
+        return new ReactionDTO.Builder()
+                .reactionType(reaction.getReactionType().toString())
+                .build();
+    }
+
 }
