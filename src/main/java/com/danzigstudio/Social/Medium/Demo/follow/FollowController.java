@@ -34,7 +34,9 @@ public class FollowController {
     public void addFollow(@RequestBody FollowDTO followDTO){
         Profile profileFollowed = profileService.profileById(followDTO.getFollowed()).get();
         Profile profileFollowing = profileService.profileById(followDTO.getFollowing()).get();
+        if(profileFollowed != profileFollowing)
         followService.addFollow(createFollow(profileFollowed, profileFollowing));
+        else throw new IllegalArgumentException("You cannot follow yourself!");
     }
     @GetMapping("/count/{profileId}")
     @ResponseStatus(HttpStatus.FOUND)
