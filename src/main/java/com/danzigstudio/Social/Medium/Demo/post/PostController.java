@@ -47,10 +47,11 @@ public class PostController {
         postService.addPost(post);
     }
 
-    @GetMapping("/timeline/all/page:{pageNumber}/{elementsNumber}")
+    @GetMapping("/timeline/all/page:{pageNumber}/{elementsNumber}/profile:{profileId}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<PostDTO> getTimeline(Pageable pageable, @PathVariable("pageNumber") int pageNumber, @PathVariable("elementsNumber") int elementsNumber) {
-       return postToPostDTO(postService.timeline(pageNumber,elementsNumber));
+    public List<PostDTO> getTimeline(Pageable pageable, @PathVariable("pageNumber") int pageNumber, @PathVariable("elementsNumber") int elementsNumber, @PathVariable("profileId") Long profileId) {
+        Profile profile = profileService.profileById(profileId).get();
+        return postToPostDTO(postService.timeline(pageNumber,elementsNumber, profile));
     }
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
@@ -64,11 +65,12 @@ public class PostController {
         postService.deletePost(postId);
     }
 
-    @GetMapping("/timeline/profile:{profileId}/page:{pageNumber}/{elementsNumber}")
+    @GetMapping("/timeline/profile:{profileId}/page:{pageNumber}/{elementsNumber}/viewer:{viewerId}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<PostDTO> getTimelineForProfile(Pageable pageable, @PathVariable("pageNumber") int pageNumber, @PathVariable("elementsNumber") int elementsNumber, @PathVariable("profileId") Long profileId) {
+    public List<PostDTO> getTimelineForProfile(Pageable pageable, @PathVariable("pageNumber") int pageNumber, @PathVariable("elementsNumber") int elementsNumber, @PathVariable("profileId") Long profileId, @PathVariable("viewerId") Long viewerId) {
         Profile profile = profileService.profileById(profileId).get();
-        return postToPostDTO(postService.profileTimeline(pageNumber,elementsNumber, profile));
+        Profile viewer = profileService.profileById(viewerId).get();
+        return postToPostDTO(postService.profileTimeline(pageNumber,elementsNumber, profile, viewer));
     }
 
     @GetMapping("/timeline/followed/profile:{profileId}/page:{pageNumber}/{elementsNumber}")
@@ -80,6 +82,6 @@ public class PostController {
         for(ProfileDTO profileDTO : profileDTOS) {
             profiles.add(profileService.profileById(profileDTO.getId()).get());
         }
-        return postToPostDTO(postService.followedTimeline(pageNumber, elementsNumber, profiles));
+        return postToPostDTO(postService.followedTimeline(pageNumber, elementsNumber, profiles, profile));
     }
 }
