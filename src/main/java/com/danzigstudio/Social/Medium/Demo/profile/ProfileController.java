@@ -1,5 +1,6 @@
 package com.danzigstudio.Social.Medium.Demo.profile;
 
+import com.danzigstudio.Social.Medium.Demo.block.BlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +16,21 @@ import static com.danzigstudio.Social.Medium.Demo.profile.ProfileMapper.profileT
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final BlockService blockService;
 
     @Autowired
-    public ProfileController(ProfileService profileService) {
+    public ProfileController(ProfileService profileService, BlockService blockService) {
         this.profileService = profileService;
+        this.blockService = blockService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/viewer:{viewerId}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ProfileDTO getProfileById(@PathVariable("id") Long id) {
+    public ProfileDTO getProfileById(@PathVariable("id") Long id, @PathVariable("viewerId") Long viewerId) {
         Profile profile = profileService.profileById(id).get();
-        return profileToProfileDTO(profile);
+        Profile viewer = profileService.profileById(viewerId).get();
+        if(blockService.checkBlock(viewer,profile) || blockService.checkBlock(profile, viewer)) throw new IllegalArgumentException();
+        else return profileToProfileDTO(profile);
     }
 
     @PostMapping("/{id}/add/bio")

@@ -29,7 +29,7 @@ public class UserService {
         for (char c : firstChars) {
             if (!Character.isLetter(c)) {
                 return false;
-            }
+             }
         }
         for (char c : lastChars) {
             if (!Character.isLetter(c)) {
