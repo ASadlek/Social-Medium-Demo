@@ -1,6 +1,7 @@
 package com.danzigstudio.Social.Medium.Demo.profile;
 
 import com.danzigstudio.Social.Medium.Demo.block.BlockService;
+import com.danzigstudio.Social.Medium.Demo.profile.profileException.ProfileBlockedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class ProfileController {
     public ProfileDTO getProfileById(@PathVariable("id") Long id, @PathVariable("viewerId") Long viewerId) {
         Profile profile = profileService.profileById(id).get();
         Profile viewer = profileService.profileById(viewerId).get();
-        if(blockService.checkBlock(viewer,profile) || blockService.checkBlock(profile, viewer)) throw new IllegalArgumentException();
+        if(blockService.checkBlock(viewer,profile) || blockService.checkBlock(profile, viewer)) throw new ProfileBlockedException("Access to the Profile denied due to block relation");
         else return profileToProfileDTO(profile);
     }
 
