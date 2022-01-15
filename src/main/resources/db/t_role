@@ -1,0 +1,11 @@
+DROP TABLE t_role;
+CREATE TABLE t_role (
+   id serial NOT NULL PRIMARY KEY,
+   name character varying NOT NULL
+) ;
+
+
+SELECT * FROM t_role;
+
+INSERT INTO t_role (name)
+VALUES ('USER');

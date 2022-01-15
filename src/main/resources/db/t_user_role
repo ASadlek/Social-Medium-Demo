@@ -1,0 +1,11 @@
+DROP TABLE t_user_role;
+CREATE TABLE t_user_role (
+   id serial NOT NULL PRIMARY KEY,
+   id_user integer NOT NULL,
+	id_role integer NOT NULL
+) ;
+
+SELECT * FROM t_user_role;
+
+INSERT INTO t_user_role (id_user, id_role)
+VALUES (1, 1);

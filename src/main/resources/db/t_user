@@ -5,8 +5,10 @@ CREATE TABLE t_user (
 	last_name character varying NOT NULL,
 	password character varying NOT NULL,
 	email character varying NOT NULL,
-	user_role character varying NOT NULL
+	username character varying NOT NULL
 ) ;
 
-
 SELECT * FROM t_user;
+
+INSERT INTO t_user (first_name, last_name, password, email, username)
+VALUES ('Aj', 'Sa', '123', '1@gmail.com', 'AS');

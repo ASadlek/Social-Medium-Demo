@@ -2,6 +2,8 @@ package com.danzigstudio.Social.Medium.Demo.user;
 
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 public class UserDTO {
 
@@ -9,7 +11,8 @@ public class UserDTO {
     private String lastName;
     private String password;
     private String email;
-    private String userRole;
+    private List<String> roles;
+    private String username;
     private Long id;
 
     private UserDTO(final Builder builder) {
@@ -17,8 +20,9 @@ public class UserDTO {
         this.lastName = builder.lastName;
         this.password = builder.password;
         this.email = builder.email;
-        this.userRole = builder.userRole;
+        this.roles = builder.roles;
         this.id = builder.id;
+        this.username = builder.username;
     }
 
     public static class Builder{
@@ -26,8 +30,9 @@ public class UserDTO {
         private String lastName;
         private String password;
         private String email;
-        private String userRole;
+        private List<String> roles;
         private Long id;
+        private String username;
 
         public Builder() {
             }
@@ -48,12 +53,16 @@ public class UserDTO {
             this.email = email;
             return this;
         }
-        public Builder userRole(String userRole) {
-            this.userRole = userRole;
+        public Builder roles(List<String> roles) {
+            this.roles = roles;
             return this;
         }
         public Builder id(Long id) {
             this.id = id;
+            return this;
+        }
+        public Builder username(String username) {
+            this.username = username;
             return this;
         }
 
@@ -78,12 +87,16 @@ public class UserDTO {
         return email;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public List<String> getRoles() {
+        return roles;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
 

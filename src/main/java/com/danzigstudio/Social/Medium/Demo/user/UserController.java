@@ -2,9 +2,13 @@ package com.danzigstudio.Social.Medium.Demo.user;
 
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.profile.ProfileService;
+import com.danzigstudio.Social.Medium.Demo.role.Role;
+import com.danzigstudio.Social.Medium.Demo.role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.danzigstudio.Social.Medium.Demo.profile.ProfileMapper.createProfile;
 import static com.danzigstudio.Social.Medium.Demo.user.UserMapper.userDTOToUser;
@@ -33,7 +37,23 @@ public class UserController {
         else throw new IllegalArgumentException("Only letters can be used in names");
     }
 
-    @GetMapping("/{id}")
+    @PostMapping("/add/role")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addRole(@RequestBody Role role) {
+        userService.saveRole(role);
+    }
+
+    @PostMapping("/add/role-to-user")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addRoleToUser(@RequestBody UserDTO userDTO) {
+        User user = userService.userByUserName(userDTO.getUsername());
+        List<String> rolesDTO = userDTO.getRoles();
+        for (String roleDTO : rolesDTO) {
+            userService.addRoleToUser(userDTO.getUsername(), roleDTO);
+        }
+    }
+
+    @GetMapping("/get/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public UserDTO getUserById(@PathVariable("id") Long id) {
         User user = userService.userById(id).get();
@@ -77,6 +97,26 @@ public class UserController {
         user.setEmail(userDTO.getEmail());
         userService.addUser(user);
     }
+
+    @GetMapping("/check/{email}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Boolean userExistsByEmail(@PathVariable("email") String email) {
+        return userService.userExistsByEmail(email);
+    }
+
+    @GetMapping("/check/{username}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Boolean existsByUsername(@PathVariable("username") String username) {
+        return userService.userExistsByUsername(username);
+    }
+
+    @GetMapping("/get/all")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
+    }
+
+
 
 
 }

@@ -21,7 +21,7 @@ public class ProfileService {
         return profileRepository.findById(id);
     }
 
-    public Profile addProfile(Profile profile){ return profileRepository.save(profile);}
+    public void addProfile(Profile profile){ profileRepository.save(profile);}
 
     public List<Profile> profileByFirstName(String firstName){
 
