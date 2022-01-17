@@ -99,5 +99,7 @@ public class UserDTO {
         return username;
     }
 
-
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }

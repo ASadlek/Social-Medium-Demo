@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.danzigstudio.Social.Medium.Demo.profile.ProfileMapper.createProfile;
@@ -33,7 +34,8 @@ public class UserController {
         User user = userDTOToUser(userDTO);
         if(userService.checkNames(user)){
             userService.addUser(user);
-            profileService.addProfile(createProfile(user));}
+            profileService.addProfile(createProfile(user));
+        }
         else throw new IllegalArgumentException("Only letters can be used in names");
     }
 
