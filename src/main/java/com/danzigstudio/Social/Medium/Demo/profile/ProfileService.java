@@ -24,7 +24,6 @@ public class ProfileService {
     public void addProfile(Profile profile){ profileRepository.save(profile);}
 
     public List<Profile> profileByFirstName(String firstName){
-
         return profileRepository.findByFirstName(firstName);
     }
 
@@ -35,5 +34,6 @@ public class ProfileService {
     public List<Profile> profileByFullName(String firstName, String lastName){
         return profileRepository.findByFullName(firstName, lastName);
     }
+
 
 }

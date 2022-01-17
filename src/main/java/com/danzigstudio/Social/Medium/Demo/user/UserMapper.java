@@ -40,5 +40,13 @@ public class UserMapper {
         return  listDTO;
     }
 
+    public static List<UserDTO> userToUserDTO(List<User> users){
+        List<UserDTO> userDTOS = new ArrayList<>();
+        for (User user : users){
+            userDTOS.add(userToUserDTO(user));
+        }
+        return  userDTOS;
+    }
+
 }
 

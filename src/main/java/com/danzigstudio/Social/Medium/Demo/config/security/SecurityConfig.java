@@ -40,10 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        //http.authorizeRequests().antMatchers("/**").permitAll(); //dla swaggera
         http.authorizeRequests().antMatchers("/user/add").permitAll();
         http.authorizeRequests().antMatchers("/login").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/user/add/**").hasAnyAuthority("ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/user/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/user/check/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/user/add/role/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/user/get/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers(POST, "/user/{id}/**}").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/profile/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/post/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/comment/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/follow/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/block/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/reaction/**").hasAnyAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

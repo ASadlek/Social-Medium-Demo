@@ -31,4 +31,5 @@ public class BlockService {
     public Boolean checkBlock(Profile blocker, Profile blocked){
         return blockRepository.blockRelationCheck(blocker, blocked) != null;
     }
+
 }

@@ -56,7 +56,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id);
     }
 
-    public User userByUserName (String username){ //usun bo jest inne???????? idk
+    public User userByUsername (String username){ //usun bo jest inne???????? idk
         return userRepository.findByUsername(username);
     }
 
