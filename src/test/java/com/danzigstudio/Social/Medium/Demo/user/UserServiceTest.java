@@ -21,22 +21,22 @@ class UserServiceTest {
     }
 
     @Test
-    void checkNames_NameContainsOnlyLetters_True() {
-        assertEquals(true, userService.checkNames(user));
+    void checkLettersInNames_NameContainsOnlyLetters_True() {
+        assertEquals(true, userService.checkLettersInNames(user));
     }
 
     @Test
-    void checkNames_NameContainsNumber_False() {
+    void checkLettersInNames_NameContainsNumber_False() {
         user.setFirstName(user.getFirstName() + 3);
-        assertEquals(false, userService.checkNames(user));
+        assertEquals(false, userService.checkLettersInNames(user));
     }
 
     @Test
-    void checkNames_NameContainsNull_NullPointerException() {
+    void checkLettersInNames_NameContainsNull_NullPointerException() {
         user.setFirstName(null);
         NullPointerException exception = assertThrows(
                 NullPointerException.class,
-                () -> userService.checkNames(user)
+                () -> userService.checkLettersInNames(user)
         );
     }
 

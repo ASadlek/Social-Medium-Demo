@@ -82,7 +82,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public Boolean checkNames(User user) {
+    public Boolean checkLettersInNames(User user) {
         char[] firstChars = user.getFirstName().toCharArray();
         char[] lastChars = user.getLastName().toCharArray();
         for (char c : firstChars) {

@@ -3,12 +3,10 @@ package com.danzigstudio.Social.Medium.Demo.user;
 import com.danzigstudio.Social.Medium.Demo.profile.Profile;
 import com.danzigstudio.Social.Medium.Demo.profile.ProfileService;
 import com.danzigstudio.Social.Medium.Demo.role.Role;
-import com.danzigstudio.Social.Medium.Demo.role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.danzigstudio.Social.Medium.Demo.profile.ProfileMapper.createProfile;
@@ -32,11 +30,14 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public void registerUser(@RequestBody UserDTO userDTO) {
         User user = userDTOToUser(userDTO);
-        if(userService.checkNames(user)){
-            userService.addUser(user);
-            profileService.addProfile(createProfile(user));
-        }
-        else throw new IllegalArgumentException("Only letters can be used in names");
+        if(userService.checkLettersInNames(user)){
+            if(!userService.userExistsByUsername(user.getUsername())){
+                if(!userService.userExistsByEmail(user.getEmail())){
+                    userService.addUser(user);
+                    profileService.addProfile(createProfile(user));
+                } else throw new IllegalArgumentException("Email is taken");
+            } else throw new IllegalArgumentException("Username already exists");
+        } else throw new IllegalArgumentException("Only letters can be used in names");
     }
 
     @PostMapping("/add/role")
