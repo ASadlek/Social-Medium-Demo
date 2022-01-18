@@ -41,18 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //http.authorizeRequests().antMatchers("/**").permitAll(); //dla swaggera
-        http.authorizeRequests().antMatchers("/user/add").permitAll();
-        http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests().antMatchers("/user/add", "/login", "/user/token/**").permitAll();
         http.authorizeRequests().antMatchers("/user/check/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/user/add/role/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().antMatchers(GET, "/user/get/**").hasAnyAuthority("USER");
         http.authorizeRequests().antMatchers(POST, "/user/{id}/**}").hasAnyAuthority("USER");
-        http.authorizeRequests().antMatchers("/profile/**").hasAnyAuthority("USER");
-        http.authorizeRequests().antMatchers("/post/**").hasAnyAuthority("USER");
-        http.authorizeRequests().antMatchers("/comment/**").hasAnyAuthority("USER");
-        http.authorizeRequests().antMatchers("/follow/**").hasAnyAuthority("USER");
-        http.authorizeRequests().antMatchers("/block/**").hasAnyAuthority("USER");
-        http.authorizeRequests().antMatchers("/reaction/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers("/profile/**", "/post/**", "/comment/**", "/follow/**", "/block/**", "/reaction/**").hasAnyAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

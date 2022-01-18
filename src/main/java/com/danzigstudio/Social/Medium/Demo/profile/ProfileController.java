@@ -47,8 +47,6 @@ public class ProfileController {
         profileService.addProfile(profile);
     }
 
-
-
     @GetMapping("/viewer:{id}/find")
     @ResponseBody
     @ResponseStatus(HttpStatus.FOUND)
